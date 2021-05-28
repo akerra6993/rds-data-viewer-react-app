@@ -1,24 +1,21 @@
-import logo from './logo.svg';
+import './component/StickyHeadTable'
 import './App.css';
+
+import React from 'react';
+import StickyHeadTable from './component/StickyHeadTable';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <br />
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <StickyHeadTable />
+      </Container>
+    </React.Fragment>
+    
   );
 }
 
