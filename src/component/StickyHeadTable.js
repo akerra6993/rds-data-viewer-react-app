@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
+import getDbInstances from '../accessor/AWSAccessor'
+
 const columns = [
   { id: 'id', label: 'DB identifier', minWidth: 120 },
   { id: 'role', label: 'Role', minWidth: 100 },
@@ -33,12 +35,6 @@ function createData(id) {
     };
 }
 
-const rows = [
-  createData('database-1'),
-  createData('database-2'),
-  createData('database-3'),
-];
-
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -52,6 +48,7 @@ export default function StickyHeadTable() {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([])
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -61,6 +58,15 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  React.useEffect(() => {
+    getDbInstances().then((instances) => {
+      console.log(instances)
+      setRows(instances.map(instance => {
+        return createData(instance.DBInstanceIdentifier)
+      }))
+    })
+  });
 
   return (
     <Paper className={classes.root}>
