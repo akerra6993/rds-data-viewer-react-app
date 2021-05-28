@@ -26,7 +26,7 @@ function createData(id) {
       role: 'Instance',
       engine: 'MySQL Community',
       region: 'us-west-2b',
-      size: 'db.t2.micro',
+      size: 'db.t3.micro',
       status: 'Active',
       cpu: 0.8,
       activity: '100 connections'
