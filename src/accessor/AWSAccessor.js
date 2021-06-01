@@ -15,7 +15,7 @@ const cognitoClient = new CognitoIdentityClient({ region })
 export default async function getDbInstancesWithMetrics() {
     const { Token, IdentityId } = await getTokenUsingBasicFlow();
     const credentials = fromWebToken({ 
-        roleArn: "arn:aws:iam::333054760036:role/Cognito_TestUnauth_Role",
+        roleArn: "arn:aws:iam::960031658638:role/Cognito_RDSDataAppPoolUnauth_Role",
         webIdentityToken: Token,
         roleSessionName: IdentityId.substring(IdentityId.indexOf(":") + 1),
         roleAssumerWithWebIdentity: getDefaultRoleAssumerWithWebIdentity()
@@ -39,8 +39,7 @@ export default async function getDbInstancesWithMetrics() {
 }
 
 async function getTokenUsingBasicFlow() {
-    const getIdCommand = new GetIdCommand({ IdentityPoolId: "us-east-1:490490d8-3dfe-4d7a-8264-9f8589329999" });  //"us-east-1:6f6d1285-9151-4cdc-81d4-cfddf31ecdfb"
-    const id = (await cognitoClient.send(getIdCommand)).IdentityId;
+    const getIdCommand = new GetIdCommand({ IdentityPoolId: "us-east-1:6f6d1285-9151-4cdc-81d4-cfddf31ecdfb" });
     const getOpenIdTokenCommand = new GetOpenIdTokenCommand({ IdentityId: id });
     return await cognitoClient.send(getOpenIdTokenCommand)
 }
