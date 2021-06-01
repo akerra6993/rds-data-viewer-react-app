@@ -38,8 +38,11 @@ export default async function getDbInstancesWithMetrics() {
     })
 }
 
+// Enhanced Cognito Authentication flow only allows access to certain AWS services regardless of IAM policy (not including RDS).
+// See https://stackoverflow.com/questions/67761849/iam-permission-issue-when-using-cognito-unauth-role
 async function getTokenUsingBasicFlow() {
     const getIdCommand = new GetIdCommand({ IdentityPoolId: "us-east-1:6f6d1285-9151-4cdc-81d4-cfddf31ecdfb" });
+    const id = (await cognitoClient.send(getIdCommand)).IdentityId;
     const getOpenIdTokenCommand = new GetOpenIdTokenCommand({ IdentityId: id });
     return await cognitoClient.send(getOpenIdTokenCommand)
 }

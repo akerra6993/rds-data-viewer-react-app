@@ -30,7 +30,7 @@ function createData(instance) {
       region: instance.AvailabilityZone,
       size: instance.DBInstanceClass,
       status: instance.DBInstanceStatus,
-      cpu: `${instance.cpu.toFixed(2)}%`,
+      cpu: `${instance.cpu?.toFixed(2) || 0}%`,
       activity: instance.conns
     };
 }
