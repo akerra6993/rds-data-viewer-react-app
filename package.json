@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.17.0",
     "@aws-sdk/client-cognito-identity": "^3.17.0",
     "@aws-sdk/client-pi": "^3.17.0",
     "@aws-sdk/client-rds": "^3.17.0",

@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
-import getDbInstances from '../accessor/AWSAccessor'
+import getDbInstancesWithMetrics from '../accessor/AWSAccessor'
 
 const columns = [
   { id: 'id', label: 'DB identifier', minWidth: 120 },
@@ -30,8 +30,8 @@ function createData(instance) {
       region: instance.AvailabilityZone,
       size: instance.DBInstanceClass,
       status: instance.DBInstanceStatus,
-      cpu: 'TBD',
-      activity: 'TBD'
+      cpu: `${instance.cpu.toFixed(2)}%`,
+      activity: instance.conns
     };
 }
 
@@ -60,7 +60,7 @@ export default function StickyHeadTable() {
   };
 
   React.useEffect(() => {
-    getDbInstances().then((instances) => {
+    getDbInstancesWithMetrics().then((instances) => {
       console.log(instances)
       setRows(instances.map(instance => {
         return createData(instance)
