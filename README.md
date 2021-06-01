@@ -16,9 +16,7 @@ You will also see any lint errors in the console.
 
 This application is hosted using [AWS Amplify](https://aws.amazon.com/amplify/). The Amplify project is configured to track the [GitHub Repository](https://github.com/akerra6993/rds-data-viewer-react-app). Commits to the `main` branch will automatically be built and deployed. See the Amplify project in AWS console for build settings and the hosted URL.
 
-<div style="background-color:#fff;">
 ![continuous deployment](docs/cd.png)
-<div>
 
 ## Authentication and Permissions
 
@@ -26,9 +24,7 @@ This application uses [AWS Cognito](https://aws.amazon.com/cognito/) to generate
 
 The below diagram illustrates the authentication flow:
 
-<div style="background-color:#fff;">
 ![auth flow](docs/auth.png)
-</div>
 
 This is referred to as the "Basic (Classic) AuthFlow" for Cognito: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html. It is required for this app since RDS and EC2 APIs are not supported when using enhanced auth (see https://docs.aws.amazon.com/cognito/latest/developerguide/iam-roles.html).
 
