@@ -22,16 +22,16 @@ const columns = [
   { id: 'activity', label: 'Current activity', minWidth: 100 },
 ];
 
-function createData(id) {
+function createData(instance) {
   return { 
-      id: id, 
+      id: instance.DBInstanceIdentifier, 
       role: 'Instance',
-      engine: 'MySQL Community',
-      region: 'us-west-2b',
-      size: 'db.t3.micro',
-      status: 'Active',
-      cpu: 0.8,
-      activity: '100 connections'
+      engine: instance.Engine,
+      region: instance.AvailabilityZone,
+      size: instance.DBInstanceClass,
+      status: instance.DBInstanceStatus,
+      cpu: 'TBD',
+      activity: 'TBD'
     };
 }
 
@@ -63,10 +63,10 @@ export default function StickyHeadTable() {
     getDbInstances().then((instances) => {
       console.log(instances)
       setRows(instances.map(instance => {
-        return createData(instance.DBInstanceIdentifier)
+        return createData(instance)
       }))
     })
-  });
+  }, []);
 
   return (
     <Paper className={classes.root}>
@@ -88,7 +88,7 @@ export default function StickyHeadTable() {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (

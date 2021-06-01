@@ -1,5 +1,4 @@
 import './component/StickyHeadTable'
-import './App.css';
 
 import React from 'react';
 import StickyHeadTable from './component/StickyHeadTable';
